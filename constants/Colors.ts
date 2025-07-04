@@ -1,26 +1,54 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Cores usadas no aplicativo de Lista de Tarefas com Perfil de Usuário.
+ * Definidas para os modos claro e escuro.
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const primaryLight = '#6366f1'; // Indigo-500
+const primaryDark = '#818cf8'; // Indigo-400
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    primary: primaryLight,
+    primaryDark: '#4f46e5', // Indigo-600
+    primaryLight: '#a5b4fc', // Indigo-300
+    secondary: '#f97316', // Orange-500
+    background: '#ffffff',
+    card: '#f9fafb', // Gray-50
+    text: '#1f2937', // Gray-800
+    textSecondary: '#6b7280', // Gray-500
+    border: '#e5e7eb', // Gray-200
+    notification: '#ef4444', // Red-500
+    success: '#10b981', // Emerald-500
+    error: '#ef4444', // Red-500
+    warning: '#f59e0b', // Amber-500
+    info: '#3b82f6', // Blue-500
+    tabIconDefault: '#9ca3af', // Gray-400
+    tabIconSelected: primaryLight,
+    inputBackground: '#f3f4f6', // Gray-100
+    overlay: 'rgba(0, 0, 0, 0.5)',
+    shadow: 'rgba(0, 0, 0, 0.1)',
+    skeleton: '#e5e7eb', // Gray-200
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    primary: primaryDark,
+    primaryDark: '#6366f1', // Indigo-500
+    primaryLight: '#c7d2fe', // Indigo-200
+    secondary: '#fb923c', // Orange-400
+    background: '#111827', // Gray-900
+    card: '#1f2937', // Gray-800
+    text: '#f9fafb', // Gray-50
+    textSecondary: '#9ca3af', // Gray-400
+    border: '#374151', // Gray-700
+    notification: '#f87171', // Red-400
+    success: '#34d399', // Emerald-400
+    error: '#f87171', // Red-400
+    warning: '#fbbf24', // Amber-400
+    info: '#60a5fa', // Blue-400
+    tabIconDefault: '#6b7280', // Gray-500
+    tabIconSelected: primaryDark,
+    inputBackground: '#374151', // Gray-700
+    overlay: 'rgba(0, 0, 0, 0.7)',
+    shadow: 'rgba(0, 0, 0, 0.3)',
+    skeleton: '#374151', // Gray-700
   },
 };

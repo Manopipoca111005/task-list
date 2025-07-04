@@ -1,5 +1,72 @@
 # Welcome to your Expo app 👋
+# Lista de Tarefas com Perfil de Usuário
 
+Um aplicativo React Native completo para gerenciamento de tarefas pessoais com autenticação de usuário, perfil personalizável e integração com API externa para frases motivacionais.
+
+## Funcionalidades
+
+### Autenticação de Usuário
+- Login e cadastro de usuários
+- Gerenciamento de estado global do usuário com Context API
+- Armazenamento local com AsyncStorage
+
+### Lista de Tarefas (CRUD)
+- Adicionar, editar, marcar como concluída e excluir tarefas
+- Filtros (todas, completas, incompletas)
+- Armazenamento local com AsyncStorage
+
+### Perfil do Usuário
+- Foto de perfil (simulada)
+- Edição de nome, email e bio
+- Integração com API de frases motivacionais
+
+### Extras
+- Suporte a Modo Escuro
+- UI/UX moderno e responsivo
+- Feedback visual para todas as ações
+
+## Tecnologias Utilizadas
+
+- React Native (Expo)
+- TypeScript
+- Expo Router para navegação
+- Context API para gerenciamento de estado
+- AsyncStorage para persistência de dados
+- Integração com API externa (Advice Slip API)
+- Componentes de UI personalizados
+
+## Como Executar
+
+1. Clone este repositório
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Inicie o servidor de desenvolvimento:
+   ```bash
+   npx expo start
+   ```
+
+## Estrutura do Projeto
+
+- `/app` - Telas e navegação (usando Expo Router)
+- `/components` - Componentes reutilizáveis
+- `/contexts` - Contextos para gerenciamento de estado
+- `/constants` - Constantes como cores e temas
+- `/services` - Serviços de API
+- `/assets` - Recursos estáticos como imagens e fontes
+
+## Melhorias Futuras
+
+- Implementar autenticação real com Firebase
+- Adicionar sincronização em nuvem das tarefas
+- Implementar notificações locais para lembretes
+- Adicionar testes automatizados
+- Integrar analytics para monitoramento de uso
+
+## Licença
+
+MIT
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started

@@ -1,75 +1,146 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { useTasks } from '../../contexts/TaskContext';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { TaskItem } from '../../components/ui/TaskItem';
+import { TaskFilter } from '../../components/ui/TaskFilter';
+import { EmptyState } from '../../components/ui/EmptyState';
+import { FontSizes, Spacing, Typography } from '../../constants/Theme';
+import { Feather } from '@expo/vector-icons';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function TasksScreen() {
+  const router = useRouter();
+  const { filteredTasks, isLoading } = useTasks();
+  const { colors } = useTheme();
+  const { user } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
 
-export default function HomeScreen() {
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    // Simulando uma atualização
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setRefreshing(false);
+  }, []);
+
+  const renderEmptyComponent = () => (
+    <EmptyState
+      title="Sem tarefas"
+      message="Você não possui tarefas no momento. Toque no botão + para adicionar uma nova tarefa."
+      icon="clipboard"
+      style={{ marginTop: 50 }}
+    />
+  );
+
+  const handleTaskPress = (taskId: string) => {
+    router.push(`/task/${taskId}`);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.header}>
+        <View>
+          <Text style={[styles.greeting, { color: colors.textSecondary }]}>
+            Olá,
+          </Text>
+          <Text style={[styles.userName, { color: colors.text }]}>
+            {user?.name || 'Usuário'}
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={[styles.themeToggle, { backgroundColor: colors.inputBackground }]}
+          onPress={() => {}}
+        >
+          <Feather name="moon" size={20} color={colors.textSecondary} />
+        </TouchableOpacity>
+      </View>
+
+      <Text style={[styles.sectionTitle, { color: colors.text }]}>
+        Suas Tarefas
+      </Text>
+
+      <TaskFilter />
+
+      <FlatList
+        data={filteredTasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TaskItem task={item} onPress={() => handleTaskPress(item.id)} />
+        )}
+        ListEmptyComponent={renderEmptyComponent}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+          />
+        }
+      />
+
+      <TouchableOpacity
+        style={[styles.fab, { backgroundColor: colors.primary }]}
+        onPress={() => router.push('/add')}
+      >
+        <Feather name="plus" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    padding: Spacing.lg,
+  },
+  header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 8,
+    marginBottom: Spacing.lg,
+    paddingTop: Spacing.md,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  greeting: {
+    ...Typography.styles.body,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  userName: {
+    ...Typography.styles.h2,
+  },
+  themeToggle: {
+    padding: Spacing.sm,
+    borderRadius: 20,
+  },
+  sectionTitle: {
+    ...Typography.styles.h3,
+    marginBottom: Spacing.md,
+  },
+  listContent: {
+    flexGrow: 1,
+    paddingBottom: Spacing.xxl,
+  },
+  fab: {
     position: 'absolute',
+    right: Spacing.lg,
+    bottom: Spacing.lg,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });
