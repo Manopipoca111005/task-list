@@ -53,12 +53,12 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <View
-      style={[
-        styles.card,
-        variantStyle[variant],
-        { padding: typeof padding === 'string' ? paddingMap[padding] : padding },
-        style,
-      ]}
+        style={[
+          styles.card,
+          variantStyle[variant],
+          { padding: typeof padding === 'string' ? paddingMap[padding] : padding },
+          style,
+        ]}
     >
       {children}
     </View>

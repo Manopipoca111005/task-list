@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-} from 'react-native';
-import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
-import { useTheme } from '../../contexts/ThemeContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useRouter } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { BorderRadius, FontSizes, Spacing, Typography } from '../../constants/Theme';
+import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { getRandomMotivationalQuote, MotivationalQuote } from '../../services/motivationalApi';
 
 export default function ProfileScreen() {
@@ -91,7 +91,9 @@ export default function ProfileScreen() {
           {user?.name || 'Usuário'}
         </Text>
         <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-          {user?.email || 'email@exemplo.com'}
+          {user?.provider === 'github' && user?.username 
+            ? `${user.username}` 
+            : user?.email || 'email@gmail.com'}
         </Text>
 
         {user?.bio ? (
@@ -177,7 +179,7 @@ export default function ProfileScreen() {
         onPress={handleLogout}
         variant="outline"
         leftIcon={<Feather name="log-out" size={16} color={colors.error} />}
-        style={[styles.logoutButton, { borderColor: colors.error }]}
+        style={{ ...styles.logoutButton, borderColor: colors.error }}
         textStyle={{ color: colors.error }}
       />
     </ScrollView>

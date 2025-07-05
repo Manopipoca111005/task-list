@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Card } from '../ui/Card';
 import { useTheme } from '../../contexts/ThemeContext';
-import { Spacing, Typography } from '../../constants/Theme';
+import { Spacing, Typography, FontSizes } from '../../constants/Theme';
 
 interface TaskCardProps {
   id: string;
@@ -40,7 +40,7 @@ export const TaskCard = ({
       style={styles.touchable}
     >
       <Card
-        style={[styles.container, completed && { opacity: 0.7 }]}
+        style={{ ...styles.container, ...(completed ? { opacity: 0.7 } : {}) }}
         elevation={2}
       >
         <View style={styles.contentContainer}>
@@ -139,7 +139,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    ...Typography.styles.bodyLarge,
+    ...Typography.styles.body,
+    fontSize: FontSizes.lg,
     fontFamily: Typography.fontFamily.medium,
     marginBottom: Spacing.xs,
   },
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
   },
   priorityBadge: {
     paddingHorizontal: Spacing.sm,
-    paddingVertical: Spacing.xxs,
+    paddingVertical: Spacing.sm,
     borderRadius: 12,
   },
   priorityText: {

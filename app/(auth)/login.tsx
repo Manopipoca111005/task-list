@@ -27,6 +27,7 @@ export default function LoginScreen() {
       router.replace('/(tabs)');
     } catch (error) {
       console.error('Erro ao fazer login com Google:', error);
+      // Adicionar feedback visual para o usuário seria ideal aqui
     }
   };
 
@@ -73,12 +74,12 @@ export default function LoginScreen() {
           <View style={styles.socialButtonsWrapper}>
             <Button
               title="Entrar com Google"
-              onPress={handleGoogleLogin}
               loading={isLoading}
               disabled={isLoading}
               fullWidth
-              style={[styles.socialLoginButton, { backgroundColor: '#DB4437' }]}
-              icon={<Feather name="mail" size={20} color="white" />}
+              style={{ ...styles.socialLoginButton, backgroundColor: '#DB4437' }}
+              leftIcon={<Feather name="mail" size={20} color="white" />}
+              onPress={handleGoogleLogin}
             />
 
             <Button
@@ -87,8 +88,8 @@ export default function LoginScreen() {
               loading={isLoading}
               disabled={isLoading}
               fullWidth
-              style={[styles.socialLoginButton, { backgroundColor: '#333' }]}
-              icon={<Feather name="github" size={20} color="white" />}
+              style={{ ...styles.socialLoginButton, backgroundColor: '#333' }}
+              leftIcon={<Feather name="github" size={20} color="white" />}
             />
           </View>
 

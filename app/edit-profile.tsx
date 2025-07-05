@@ -1,22 +1,22 @@
+import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Image,
-  Alert,
+    Alert,
+    Image,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
-import { useTheme } from '../contexts/ThemeContext';
-import { useAuth } from '../contexts/AuthContext';
-import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
-import { BorderRadius, FontSizes, Spacing, Typography } from '../constants/Theme';
+import { Input } from '../components/ui/Input';
+import { Spacing, Typography } from '../constants/Theme';
+import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function EditProfileScreen() {
   const router = useRouter();
@@ -26,6 +26,7 @@ export default function EditProfileScreen() {
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
   const [bio, setBio] = useState(user?.bio || '');
+  const [username, setUsername] = useState(user?.username || '');
   const [photoUrl, setPhotoUrl] = useState(user?.photoUrl || 'https://i.pravatar.cc/300');
   const [errors, setErrors] = useState<{ name?: string; email?: string; bio?: string }>({});
 
@@ -70,6 +71,7 @@ export default function EditProfileScreen() {
         email,
         bio,
         photoUrl,
+        username,
       });
       router.back();
     } catch (error) {
@@ -135,6 +137,17 @@ export default function EditProfileScreen() {
             autoCapitalize="words"
             error={errors.name}
           />
+
+          {user?.provider === 'github' && (
+            <Input
+              label="Nome de usuário do GitHub"
+              placeholder="@username"
+              value={username}
+              onChangeText={setUsername}
+              autoCapitalize="none"
+              editable={false}
+            />
+          )}
 
           <Input
             label="E-mail"

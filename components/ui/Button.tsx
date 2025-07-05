@@ -108,7 +108,7 @@ export const Button: React.FC<ButtonProps> = ({
     paddingVertical: sizeStyles[size].paddingVertical,
     paddingHorizontal: sizeStyles[size].paddingHorizontal,
     opacity: disabled && !loading ? 0.6 : 1,
-    width: fullWidth ? '100%' : undefined,
+    width: fullWidth ? '100%' as const : undefined,
   };
 
   const textStyleValue = {

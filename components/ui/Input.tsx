@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { TextInput, View, Text, StyleSheet, ViewStyle, TextStyle, TouchableOpacity } from 'react-native';
-import { useTheme } from '../../contexts/ThemeContext';
+import { StyleSheet, Text, TextInput, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { BorderRadius, FontSizes, Spacing, Typography } from '../../constants/Theme';
+import { useTheme } from '../../contexts/ThemeContext';
 
 type InputProps = {
   label?: string;
@@ -20,6 +20,7 @@ type InputProps = {
   rightIcon?: React.ReactNode;
   onRightIconPress?: () => void;
   maxLength?: number;
+  editable?: boolean;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -39,6 +40,7 @@ export const Input: React.FC<InputProps> = ({
   rightIcon,
   onRightIconPress,
   maxLength,
+  editable = true,
 }) => {
   const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
@@ -70,6 +72,7 @@ export const Input: React.FC<InputProps> = ({
               textAlignVertical: multiline ? 'top' : 'center',
               paddingLeft: leftIcon ? Spacing.xs : Spacing.md,
               paddingRight: rightIcon ? 40 : Spacing.md,
+              opacity: editable ? 1 : 0.6,
             },
             inputStyle,
           ]}
@@ -85,6 +88,7 @@ export const Input: React.FC<InputProps> = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
           maxLength={maxLength}
+          editable={editable}
         />
 
         {rightIcon && (
