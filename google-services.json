@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "127212641212",
+    "project_id": "task-list-app-313be",
+    "storage_bucket": "task-list-app-313be.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127212641212:android:6464d5ed0709b2691429b9",
+        "android_client_info": {
+          "package_name": "com.gustavoramos.tasklist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127212641212-ac40cc1cd3la23oasr1skkec9n2l0m2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvueWAIpvJ1i0_jsWthZe5AVO8WXRNNg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127212641212-ac40cc1cd3la23oasr1skkec9n2l0m2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
