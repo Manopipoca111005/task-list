@@ -1,26 +1,25 @@
+import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useTasks } from '../../contexts/TaskContext';
-import { useTheme } from '../../contexts/ThemeContext';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
-import { FontSizes, Spacing, Typography } from '../../constants/Theme';
-import { Feather } from '@expo/vector-icons';
+import { Spacing, Typography } from '../../constants/Theme';
+import { useTasks } from '../../contexts/TaskContext';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function AddTaskScreen() {
   const router = useRouter();
   const { addTask } = useTasks();
-  const { colors } = useTheme();
-
+  const { colors, isDarkMode, toggleTheme } = useTheme();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,6 +77,12 @@ export default function AddTaskScreen() {
           <Text style={[styles.title, { color: colors.text }]}>
             Nova Tarefa
           </Text>
+          <TouchableOpacity
+            style={[styles.themeToggle, { backgroundColor: colors.inputBackground }]}
+            onPress={toggleTheme}
+          >
+            <Feather name={isDarkMode ? "sun" : "moon"} size={20} color={colors.textSecondary} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.formContainer}>
@@ -128,6 +133,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: Spacing.xl,
     paddingTop: Spacing.md,
   },
@@ -145,6 +151,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: Spacing.lg,
+  },
+  themeToggle: {
+    padding: Spacing.sm,
+    borderRadius: 20,
   },
   cancelButton: {
     flex: 1,

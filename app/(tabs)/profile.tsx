@@ -60,7 +60,7 @@ export default function ProfileScreen() {
       contentContainerStyle={styles.content}
     >
       <View style={styles.header}>
-        <Text style={[styles.title, { color: colors.text }]}>Perfil</Text>
+        <Text style={[styles.title, { color: colors.text }]}> Seu Perfil</Text>
         <TouchableOpacity
           style={[styles.themeToggle, { backgroundColor: colors.inputBackground }]}
           onPress={toggleTheme}

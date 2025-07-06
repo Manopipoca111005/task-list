@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { Colors } from '../constants/Colors';
 import { Shadows } from '../constants/Theme';
@@ -18,7 +18,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Atualiza o tema quando o esquema de cores do sistema mudar
   useEffect(() => {
-    setIsDarkMode(systemColorScheme === 'dark');
+    if (systemColorScheme) {
+      setIsDarkMode(systemColorScheme === 'dark');
+    }
   }, [systemColorScheme]);
 
   const toggleTheme = () => {

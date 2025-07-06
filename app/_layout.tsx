@@ -1,14 +1,16 @@
-import React from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider } from '../contexts/ThemeContext';
+import React from 'react';
 import { AuthProvider } from '../contexts/AuthContext';
 import { TaskProvider } from '../contexts/TaskContext';
+import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
-export default function RootLayout() {
+function RootLayoutContent() {
+  const { isDarkMode } = useTheme();
+  
   return (
-    <ThemeProvider>
-      <StatusBar style="auto" />
+    <>
+      <StatusBar style={isDarkMode ? 'light' : 'dark'} backgroundColor="transparent" translucent />
       <AuthProvider>
         <TaskProvider>
           <Stack
@@ -19,6 +21,14 @@ export default function RootLayout() {
           />
         </TaskProvider>
       </AuthProvider>
+    </>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutContent />
     </ThemeProvider>
   );
 }

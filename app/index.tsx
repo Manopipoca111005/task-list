@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { Text, View, ActivityIndicator, Button } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 
 export default function Index() {

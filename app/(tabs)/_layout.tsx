@@ -1,9 +1,9 @@
-import { Tabs } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
+import { Tabs, useRouter, useSegments } from 'expo-router';
+import { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
-import { Feather } from '@expo/vector-icons';
-import { useEffect } from 'react';
-import { useRouter, useSegments } from 'expo-router';
 
 export default function TabsLayout() {
   const { isSignedIn, isLoading } = useAuth();
@@ -25,10 +25,13 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.border,
+          paddingBottom: 0,
+          height: 60,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 12, 
           fontWeight: '500',
+          marginBottom: 0,
         },
         headerStyle: {
           backgroundColor: colors.background,
@@ -67,3 +70,7 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+});
+

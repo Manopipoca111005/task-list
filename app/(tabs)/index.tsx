@@ -1,26 +1,26 @@
-import React, { useState, useCallback } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { EmptyState } from '../../components/ui/EmptyState';
+import { TaskFilter } from '../../components/ui/TaskFilter';
+import { TaskItem } from '../../components/ui/TaskItem';
+import { Spacing, Typography } from '../../constants/Theme';
+import { useAuth } from '../../contexts/AuthContext';
 import { useTasks } from '../../contexts/TaskContext';
 import { useTheme } from '../../contexts/ThemeContext';
-import { useAuth } from '../../contexts/AuthContext';
-import { TaskItem } from '../../components/ui/TaskItem';
-import { TaskFilter } from '../../components/ui/TaskFilter';
-import { EmptyState } from '../../components/ui/EmptyState';
-import { FontSizes, Spacing, Typography } from '../../constants/Theme';
-import { Feather } from '@expo/vector-icons';
 
 export default function TasksScreen() {
   const router = useRouter();
-  const { filteredTasks, isLoading } = useTasks();
-  const { colors } = useTheme();
+  const { filteredTasks} = useTasks();
+  const { colors, isDarkMode, toggleTheme } = useTheme();
   const { user } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -57,9 +57,9 @@ export default function TasksScreen() {
         </View>
         <TouchableOpacity
           style={[styles.themeToggle, { backgroundColor: colors.inputBackground }]}
-          onPress={() => {}}
+          onPress={toggleTheme}
         >
-          <Feather name="moon" size={20} color={colors.textSecondary} />
+          <Feather name={isDarkMode ? "sun" : "moon"} size={20} color={colors.textSecondary} />
         </TouchableOpacity>
       </View>
 
@@ -89,7 +89,7 @@ export default function TasksScreen() {
       />
 
       <TouchableOpacity
-        style={[styles.fab, { backgroundColor: colors.primary }]}
+        style={[styles.fab, { backgroundColor: colors.primary }, colors.shadow && { shadowColor: colors.shadow }]}
         onPress={() => router.push('/add')}
       >
         <Feather name="plus" size={24} color="white" />
