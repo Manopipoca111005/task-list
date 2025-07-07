@@ -1,9 +1,11 @@
+"use client";
 import { Feather } from '@expo/vector-icons';
 import { Tabs, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
+
 
 export default function TabsLayout() {
   const { isSignedIn, isLoading } = useAuth();

@@ -14,7 +14,7 @@ type User = {
   photoUrl?: string;
   bio?: string;
   provider?: 'google' | 'github';
-  username?: string; // Nome de usuário do GitHub
+  username?: string;
 };
 
 type AuthContextType = {

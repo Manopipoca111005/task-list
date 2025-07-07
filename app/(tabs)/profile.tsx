@@ -45,6 +45,7 @@ export default function ProfileScreen() {
     router.push('/edit-profile');
   };
 
+
   const handleLogout = async () => {
     try {
       await signOut();
